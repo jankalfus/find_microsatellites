@@ -6,23 +6,6 @@ use std::path::Path;
 use clap::Parser;
 use itertools::Itertools;
 use tabled::{Style, Table, Tabled};
-// use itertools::{Itertools, repeat_n};
-
-// fn generate_nucleotides() {
-//     let mut nucleotides = Vec::new();
-//
-//     for len in 2..=4 {
-//         for x in repeat_n(vec!['A', 'T', 'C', 'G'], len).into_iter().multi_cartesian_product() {
-//             nucleotides.push(x);
-//         }
-//     }
-//
-//     for nuc in nucleotides {
-//         println!("{}", nuc.into_iter().collect::<String>());
-//     }
-//
-//     todo!("Remove repetitions")
-// }
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
