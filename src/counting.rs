@@ -1,50 +1,5 @@
 use std::collections::HashMap;
 
-#[cfg(test)]
-mod count_matches_tests {
-    use super::Counter;
-
-    #[test]
-    fn empty_string() {
-        assert_eq!(Counter::count_matches("", "AA"), vec![]);
-    }
-
-    #[test]
-    fn no_match() {
-        assert_eq!(Counter::count_matches("TATT", "AA"), vec![])
-    }
-
-    #[test]
-    fn single_match() {
-        assert_eq!(Counter::count_matches("AA", "AA"), vec![1]);
-    }
-
-    #[test]
-    fn single_match_in_odd_number_of_chars() {
-        assert_eq!(Counter::count_matches("AAA", "AA"), vec![1]);
-    }
-
-    #[test]
-    fn multiple_matches() {
-        assert_eq!(Counter::count_matches("AAAA", "AA"), vec![2]);
-    }
-
-    #[test]
-    fn multiple_distant_matches() {
-        assert_eq!(Counter::count_matches("AATTAA", "AA"), vec![1, 1]);
-    }
-
-    #[test]
-    fn multiple_various_matches() {
-        assert_eq!(Counter::count_matches("AAAAAATTAAGAA", "AA"), vec![3, 1, 1]);
-    }
-
-    #[test]
-    fn odd_pattern() {
-        assert_eq!(Counter::count_matches("TATTATGATGATTAT", "GAT"), vec![2]);
-    }
-}
-
 pub struct Counter<'a> {
     occurrences: HashMap<&'a str, u64>,
     required_number_of_repetitions: usize,
@@ -122,4 +77,49 @@ impl<'a> Counter<'a> {
 pub struct CounterResult<'a> {
     pub occurrences: &'a HashMap<&'a str, u64>,
     pub total_reads_length: u64,
+}
+
+#[cfg(test)]
+mod count_matches_tests {
+    use super::Counter;
+
+    #[test]
+    fn empty_string() {
+        assert_eq!(Counter::count_matches("", "AA"), vec![]);
+    }
+
+    #[test]
+    fn no_match() {
+        assert_eq!(Counter::count_matches("TATT", "AA"), vec![])
+    }
+
+    #[test]
+    fn single_match() {
+        assert_eq!(Counter::count_matches("AA", "AA"), vec![1]);
+    }
+
+    #[test]
+    fn single_match_in_odd_number_of_chars() {
+        assert_eq!(Counter::count_matches("AAA", "AA"), vec![1]);
+    }
+
+    #[test]
+    fn multiple_matches() {
+        assert_eq!(Counter::count_matches("AAAA", "AA"), vec![2]);
+    }
+
+    #[test]
+    fn multiple_distant_matches() {
+        assert_eq!(Counter::count_matches("AATTAA", "AA"), vec![1, 1]);
+    }
+
+    #[test]
+    fn multiple_various_matches() {
+        assert_eq!(Counter::count_matches("AAAAAATTAAGAA", "AA"), vec![3, 1, 1]);
+    }
+
+    #[test]
+    fn odd_pattern() {
+        assert_eq!(Counter::count_matches("TATTATGATGATTAT", "GAT"), vec![2]);
+    }
 }
