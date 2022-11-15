@@ -34,7 +34,7 @@ fn main() {
 
     let mut occurrences = HashMap::new();
 
-    for nucleotide in vec!["AA", "GA", "TA", "CAG", "CAA", "CGG", "GAG", "GATA"] {
+    for nucleotide in ["AA", "GA", "TA", "CAG", "CAA", "CGG", "GAG", "GATA"] {
         occurrences.insert(nucleotide, 0_u64);
     }
 
@@ -46,7 +46,7 @@ fn main() {
     for maybe_line in lines {
         let line = maybe_line.unwrap();
 
-        if line.starts_with("@") {
+        if line.starts_with('@') {
             use_this = true;
             continue;
         }

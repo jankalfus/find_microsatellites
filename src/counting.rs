@@ -51,26 +51,22 @@ pub fn count_matches(str: &str, pattern: &str) -> Vec<usize> {
     let mut current = it.next();
     let mut next = it.next();
 
-    loop {
-        if let Some(current_value) = current {
-            let mut count = 1;
+    while let Some(current_value) = current {
+        let mut count = 1;
 
-            while let Some(next_value) = next {
-                if current_value.0 + pattern.len() * count == next_value.0 {
-                    count += 1;
-                    next = it.next();
-                } else {
-                    break;
-                }
+        while let Some(next_value) = next {
+            if current_value.0 + pattern.len() * count == next_value.0 {
+                count += 1;
+                next = it.next();
+            } else {
+                break;
             }
-
-            current = next;
-            next = it.next();
-
-            counts.push(count);
-        } else {
-            break;
         }
+
+        current = next;
+        next = it.next();
+
+        counts.push(count);
     }
 
     counts
