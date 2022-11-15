@@ -62,7 +62,7 @@ fn main() {
 
     let mut occurrences = HashMap::new();
 
-    for nucleotide in vec!["AA", "GA", "TA", "GC", "CAG", "CAA", "GAG", "GATA"] {
+    for nucleotide in vec!["AA", "GA", "TA", "CAG", "CAA", "CGG", "GAG", "GATA"] {
         occurrences.insert(nucleotide, 0_u64);
     }
 
