@@ -1,5 +1,5 @@
 [package]
-name = "microsatellites"
+name = "find_microsatellites"
 version = "0.1.0"
 edition = "2021"
 authors = ["Jan Kalfus"]
