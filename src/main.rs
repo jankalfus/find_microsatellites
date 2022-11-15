@@ -1,14 +1,12 @@
 mod counting;
+mod fs;
 
 use crate::counting::count_matches;
+use crate::fs::read_lines;
 
 use clap::Parser;
 use itertools::Itertools;
 use std::collections::HashMap;
-use std::fs::File;
-use std::io;
-use std::io::BufRead;
-use std::path::Path;
 use tabled::{Style, Table, Tabled};
 
 #[derive(Parser, Debug)]
@@ -16,15 +14,6 @@ use tabled::{Style, Table, Tabled};
 struct Args {
     /// Path to file to process
     filename: String,
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-
-    Ok(io::BufReader::new(file).lines())
 }
 
 fn main() {
