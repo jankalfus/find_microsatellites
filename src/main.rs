@@ -1,8 +1,8 @@
 mod counting;
-mod fs;
+mod fastq;
 
 use crate::counting::count_matches;
-use crate::fs::read_lines;
+use crate::fastq::SequenceReader;
 
 use clap::Parser;
 use itertools::Itertools;
@@ -29,33 +29,20 @@ fn main() {
 
     let mut total_reads_length: u64 = 0;
 
-    let lines = read_lines(args.filename).unwrap();
+    let reader = SequenceReader::new(&args.filename);
+    for sequence in reader {
+        total_reads_length += sequence.len() as u64;
 
-    let mut use_this = false;
-    for maybe_line in lines {
-        let line = maybe_line.unwrap();
+        for (nuc, count) in occurrences.iter_mut() {
+            let match_counts = count_matches(&sequence, nuc);
 
-        if line.starts_with('@') {
-            use_this = true;
-            continue;
-        }
-
-        if use_this {
-            use_this = false;
-
-            total_reads_length += line.len() as u64;
-
-            for (nuc, count) in occurrences.iter_mut() {
-                let match_counts = count_matches(&line, nuc);
-
-                *count += match_counts.iter().fold(0, |acc, &c| {
-                    if c >= required_number_of_repetitions {
-                        acc + c
-                    } else {
-                        acc
-                    }
-                }) as u64;
-            }
+            *count += match_counts.iter().fold(0, |acc, &c| {
+                if c >= required_number_of_repetitions {
+                    acc + c
+                } else {
+                    acc
+                }
+            }) as u64;
         }
     }
 
