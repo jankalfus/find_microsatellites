@@ -1,12 +1,11 @@
 mod counting;
 mod fastq;
 
-use crate::counting::count_matches;
+use crate::counting::Counter;
 use crate::fastq::SequenceReader;
 
 use clap::Parser;
 use itertools::Itertools;
-use std::collections::HashMap;
 use tabled::{Style, Table, Tabled};
 
 #[derive(Parser, Debug)]
@@ -19,34 +18,20 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let required_number_of_repetitions = 5;
-
-    let mut occurrences = HashMap::new();
-
-    for nucleotide in ["AA", "GA", "TA", "CAG", "CAA", "CGG", "GAG", "GATA"] {
-        occurrences.insert(nucleotide, 0_u64);
-    }
-
-    let mut total_reads_length: u64 = 0;
+    let mut counter = Counter::new(
+        vec!["AA", "GA", "TA", "CAG", "CAA", "CGG", "GAG", "GATA"],
+        5,
+    );
 
     let reader = SequenceReader::new(&args.filename);
     for sequence in reader {
-        total_reads_length += sequence.len() as u64;
-
-        for (nuc, count) in occurrences.iter_mut() {
-            let match_counts = count_matches(&sequence, nuc);
-
-            *count += match_counts.iter().fold(0, |acc, &c| {
-                if c >= required_number_of_repetitions {
-                    acc + c
-                } else {
-                    acc
-                }
-            }) as u64;
-        }
+        counter.add(&sequence);
     }
 
-    let results: Vec<Result> = occurrences
+    let res = counter.get_results();
+
+    let results: Vec<Result> = res
+        .occurrences
         .iter()
         .sorted_by(|&a, &b| a.1.cmp(b.1))
         .rev()
@@ -54,13 +39,14 @@ fn main() {
             nucleotide: nuc.to_owned(),
             count,
             total_length: count * nuc.len() as u64,
-            total_percent: count as f64 * nuc.len() as f64 / total_reads_length as f64 * 100_f64,
+            total_percent: count as f64 * nuc.len() as f64 / res.total_reads_length as f64
+                * 100_f64,
         })
         .collect();
 
     let table = Table::new(results).with(Style::modern()).to_string();
 
-    println!("Total reads length: {}", total_reads_length);
+    println!("Total reads length: {}", res.total_reads_length);
     println!("{}", table);
 }
 
