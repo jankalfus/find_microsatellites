@@ -19,7 +19,23 @@ fn main() {
     let args = Args::parse();
 
     let mut counter = Counter::new(
-        vec!["AA", "GA", "TA", "CAG", "CAA", "CGG", "GAG", "GATA"],
+        vec![
+            "GATTC", "AGGTG", "TCGCC", "AGCTG", "CACTT", "GTTTT", "CCTAAC", "CCGGTA", "AGCGGG",
+            "CAAAAA", "GCCTGGT", "GAATC", "CACCT", "GGCGA", "CAGCT", "AAGTG", "AAAAC", "GTTAGG",
+            "TACCGG", "CCCGCT", "TTTTTG", "ACCAGGC", "TT", "TA", "TC", "TG", "AT", "AC", "AG",
+            "CC", "CG", "GC", "AA", "GA", "CA", "GT", "CT", "GG", "TTA", "TTC", "TTG", "TAT",
+            "TAA", "TAC", "TAG", "TCT", "TCA", "TCC", "TCG", "TGT", "TGA", "TGC", "TGG", "ATT",
+            "ATC", "ATG", "AAC", "AAG", "ACT", "ACA", "ACC", "CGT", "AGT", "AGA", "AGC", "AGG",
+            "CTC", "CAC", "CAG", "CCG", "CGC", "GTC", "GCC", "TAA", "GAA", "CAA", "ATA", "TTA",
+            "GTA", "CTA", "AGA", "TGA", "GGA", "CGA", "ACA", "TCA", "GCA", "CCA", "AAT", "GAT",
+            "CAT", "GTT", "CTT", "ATG", "TGT", "GGT", "ACG", "ACT", "TCT", "GCT", "CCT", "GAG",
+            "GTG", "CTG", "CGG", "GCG", "GAC", "GGC", "AAAC", "AAAT", "AACC", "AACG", "AAGC",
+            "AAGG", "AATT", "ACAT", "AGAT", "AGCC", "ATAG", "ATCC", "ATGC", "ATGG", "ATTC", "CAAC",
+            "CATC", "CCAA", "CTAG", "CTGG", "GAAA", "GAGG", "GATA", "GTAG", "TACA", "TAGA", "TCTG",
+            "TGCA", "TGGT", "TATG", "GTTT", "ATTT", "GGTT", "CGTT", "GCTT", "CCTT", "ATGT", "ATCT",
+            "GGCT", "CTAT", "GGAT", "GCAT", "CCAT", "GAAT", "GTTG", "GATG", "TTGG", "CCAG", "TTTC",
+            "CCTC", "TATC", "CTAC", "TGTA", "TCTA", "CAGA", "ACCA", "CATA",
+        ],
         5,
     );
 
