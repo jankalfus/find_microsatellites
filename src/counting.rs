@@ -7,10 +7,10 @@ pub struct Counter<'a> {
 }
 
 impl<'a> Counter<'a> {
-    pub fn new(nucleotides: Vec<&str>, required_number_of_repetitions: usize) -> Counter {
+    pub fn new(nucleotides: &Vec<&'a str>, required_number_of_repetitions: usize) -> Counter<'a> {
         let mut occurrences = HashMap::new();
 
-        for nucleotide in nucleotides {
+        for &nucleotide in nucleotides {
             occurrences.insert(nucleotide, 0_u64);
         }
 
