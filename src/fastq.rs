@@ -12,21 +12,21 @@ where
     Ok(BufReader::new(file).lines())
 }
 
-pub struct SequenceReader<'a> {
+pub struct FastqSequenceReader<'a> {
     filename: &'a str,
     iter: Option<Lines<BufReader<File>>>,
 }
 
-impl<'a> SequenceReader<'a> {
-    pub fn new(filename: &'a str) -> SequenceReader {
-        SequenceReader {
+impl<'a> FastqSequenceReader<'a> {
+    pub fn new(filename: &'a str) -> FastqSequenceReader {
+        FastqSequenceReader {
             filename,
             iter: None,
         }
     }
 }
 
-impl<'a> Iterator for SequenceReader<'a> {
+impl<'a> Iterator for FastqSequenceReader<'a> {
     type Item = String;
 
     fn next(&mut self) -> Option<Self::Item> {
