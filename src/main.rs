@@ -33,7 +33,7 @@ fn main() {
         "GGCT", "CTAT", "GGAT", "GCAT", "CCAT", "GAAT", "GTTG", "GATG", "TTGG", "CCAG", "TTTC",
         "CCTC", "TATC", "CTAC", "TGTA", "TCTA", "CAGA", "ACCA", "CATA", "AATT", "CTAG", "TGCA", "GATTC", "AGGTG", "TCGCC",
         "AGCTG", "CACTT", "GTTTT", "CCTAAC", "CCGGTA", "AGCGGG", "CAAAAA", "GCCTGGT", "GAATC", "CACCT", "GGCGA", "CAGCT",
-        "AAGTG", "AAAAC", "GTTAGG", "TACCGG", "CCCGCT", "TTTTTG", "ACCAGGC"
+        "AAGTG", "AAAAC", "GTTAGG", "TACCGG", "CCCGCT", "TTTTTG", "ACCAGGC", "TTTAGGG", "CCCTAAA"
     ];
 
     let mut counter = Counter::new(
